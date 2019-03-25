@@ -1,0 +1,55 @@
+package ca.viu.csci331.instruction.model;
+
+public class Schedule {
+	private String day;
+	private int hour;
+	private int minute;
+	private int duration;
+	private Room location;
+
+	public Schedule(String day, int h, int m, int d, Room loc) {
+		this.day = day;
+		this.hour = h;
+		this.minute = m;
+		this.duration = d;
+		this.location = loc;
+	}
+	public String getDay() {
+		return this.day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public int getHour() {
+		return this.hour;
+	}
+	public void setHour(int h) {
+		this.hour = h;
+	}
+	public int getMin() {
+		return this.minute;
+	}
+	public void setMin(int m) {
+		this.minute = m;
+	}
+	public int getDuration() {
+		return this.duration;
+	}
+	public void setDuration(int dur) {
+		this.duration = dur;
+	}
+	public Room getLocation() {
+		return this.location;
+	}
+	public void setLocation(Room loc) {
+		this.location = loc;
+	}
+	public String getTime(){
+		return hour+":"+minute;
+	}
+	
+	public void show() {
+		System.out.println("Schedule: The day is"+ this.day +", at "+ this.hour+":"+this.minute+", for  "+ duration+"hours, located at "+ location);
+	}
+
+}
