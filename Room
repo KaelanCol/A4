@@ -1,0 +1,66 @@
+package ca.viu.csci331.instruction.model;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+
+public class Room {
+	private String roomNum;
+	private String building;
+	private int cap;
+	private String start;
+	private String end;
+	
+	public Room(String num,String building, int capacity) {
+		this.roomNum = num;
+		this.building = building;
+		this.cap = capacity;	
+
+	}
+	public String getRoomNum() {
+		return roomNum;
+	}
+	public void setRoomNum(String roomNum) {
+		this.roomNum = roomNum;
+	}
+	public String getBuilding() {
+		return building;
+	}
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+	public int getCap() {
+		return cap;
+	}
+	public void setCap(int cap) {
+		this.cap = cap;
+	}
+	public void setTime(String start, String end){
+		this.start = start;
+		this.end = end;
+	}
+	public String getStart(){
+		return start;
+	}
+	public String getEnd(){
+		return end;
+	}
+	public Boolean conflictTime(String time){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:MM");
+		Date d1;
+		try {
+			d1 = sdf.parse(this.start);
+			Date d2 = sdf.parse(this.end);
+			Date d3 = sdf.parse(time);
+			if(d3.after(d1) && d3.before(d2)) return true;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+			
+		
+	}
+}
