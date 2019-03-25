@@ -1,0 +1,66 @@
+package ca.viu.csci331.instruction.model;
+
+import java.util.ArrayList;
+
+public class Instructors {
+	private ArrayList<Instructor> instructors = new ArrayList<Instructor>();
+	private ArrayList<Instructor> removed = new ArrayList<Instructor>();
+	private int capacity;
+	private int numberOfInstructors;
+	
+	public Instructors(int n) {
+		instructors = new ArrayList<Instructor>(n);
+		this.numberOfInstructors = 0;
+		this.capacity=n;
+	}
+	public Instructors() {
+		instructors = new ArrayList<Instructor>();
+		this.numberOfInstructors = 0;
+		this.capacity=100;
+	}
+	public void hire(Instructor newInstructor) {
+		if(numberOfInstructors < capacity) {
+			instructors.add(newInstructor);
+			numberOfInstructors++;
+		}else {
+			System.out.println("capacity reached");
+		}
+	}
+	public void terminate(Instructor canInstructor) {
+		if(numberOfInstructors > 0) {
+		instructors.remove(canInstructor);
+		removed.add(canInstructor);
+		numberOfInstructors--;
+		}else {
+			System.out.println("unable to remove");
+		}
+	}
+	public void show(){
+		for(int i = 0; i < instructors.size(); i++) {
+			instructors.get(i).show();
+		}
+	}
+	public Instructor searchByName(String name) {
+		for(int i = 0; i < instructors.size(); i++) {
+			if(instructors.get(i).getName().equals(name)) {
+				return instructors.get(i); 
+			}
+		}
+		return null;
+	}
+	public Instructor searchById(String id) {
+		for(int i = 0; i < instructors.size(); i++) {
+			if(instructors.get(i).getInstructorId().equals(id)) {
+				return instructors.get(i); 
+			}
+		}
+		return null;
+	}
+	public boolean contains(Instructor maybe){
+		if(instructors.contains(maybe)) return true;		
+		else return false;
+	}
+//	public ArrayList<Instructor> sort(){
+//		
+//	}
+}
