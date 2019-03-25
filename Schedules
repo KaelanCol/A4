@@ -1,0 +1,51 @@
+package ca.viu.csci331.instruction.model;
+
+import java.util.ArrayList;
+
+public class Schedules {
+	private ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+	private ArrayList<Schedule> removed = new ArrayList<Schedule>();
+	private int capacity;
+	private int numberOfSchedules;
+	
+	
+	public Schedules(int n) {
+		schedules = new ArrayList<Schedule>(n);
+		this.capacity = n;
+		this.numberOfSchedules = 0;
+	}
+	public Schedules() {
+		schedules = new ArrayList<Schedule>();
+
+	}
+	public void add(Schedule newSchedule) {
+		if(numberOfSchedules < capacity) {
+			schedules.add(newSchedule);
+			numberOfSchedules++;
+		}else {
+			System.out.println("unable to add capacity reached");
+		}
+	}
+	public void remove(Schedule canSchedule) {
+
+		if(numberOfSchedules > 0) {
+			schedules.remove(canSchedule);
+			removed.add(canSchedule);
+			numberOfSchedules--;
+		}else {
+			System.out.println("unable to remove");
+		}
+	}
+	public Boolean check(Schedule concider){
+		String time = concider.getTime();
+		for(Schedule s: schedules){
+			if(s.getLocation().conflictTime(time)) return true;
+		}
+		return false;
+	}
+	public void show() {
+		for(int i = 0; i < schedules.size(); i++) {
+			schedules.get(i).show();
+		}
+	}
+}
