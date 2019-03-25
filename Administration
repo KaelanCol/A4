@@ -1,0 +1,119 @@
+package ca.viu.csci331.instruction.services.administration;
+
+import java.util.ArrayList;
+
+import ca.viu.csci331.instruction.model.*;
+
+public class Administration {
+//	private Instructor phil = new Instructor();
+	private Instructors professors = new Instructors();
+	private Schedules schedule = new Schedules();
+	private Seminars seminar = new Seminars();
+	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private OfferredCourses courses = new OfferredCourses();
+	
+	
+	public Administration(){
+		
+	}
+	public void hire(Instructor hired){
+		if(!professors.contains(hired)){
+		professors.hire(hired);
+		}else{
+			System.out.println("Instructor already in system");
+		}
+	}
+	public void terminate(Instructor fired){
+		professors.terminate(fired);
+	}
+	public Instructor updateInstructor(Instructor i, Instructor ni){
+		if(professors.contains(i) && !rooms.contains(ni)) {
+			i=ni;
+			return ni;
+		}else {
+		 return null;
+		}
+	}
+	public Instructor searchId(String id){
+		if(professors.searchById(id)!=null)return professors.searchById(id);
+		else return null;	
+	}
+	public Instructor searchName(String name){
+		if(professors.searchByName(name)!=null)return professors.searchByName(name);
+		else return null;
+	}
+	public void offer(Course course){
+		if(!courses.contains(course)){
+			courses.offer(course);
+		}
+	}
+	public void cancel(Course course){
+		courses.cancel(course);
+	}
+	public Course updateCourse(Course c, Course newC){
+		if(courses.contains(c) && !courses.contains(newC)) {
+			c=newC;
+			return newC;
+		}else {
+		 return null;
+		}
+	}
+	public Course searchCourseName(String name){
+		if(courses.searchByName(name) != null) return courses.searchByName(name);
+		else return null;
+	}
+	public Course searchCourseNum(String num){
+		if(courses.searchByNumber(num) != null) return courses.searchByNumber(num);
+		else return null;
+	}
+	public void addRoom(Room r) {
+		rooms.add(r);
+		}
+	public void removeRoom(Room r) {
+		rooms.remove(r);
+	}
+	public Room updateRoom(Room r,Room newR) {
+		if(rooms.contains(r) && !rooms.contains(newR)) {
+			r=newR;
+			return newR;
+		}else {
+		 return null;
+		}
+	}
+	public ArrayList<Room> ListBuildingRooms(String building) {
+		ArrayList<Room> good = new ArrayList<Room>();
+		for(Room r:rooms) {
+			if(r.getBuilding().equals(building)) {
+				good.add(r);
+			}
+		}
+		return good;
+	}
+	public ArrayList<Room> ListRooms(int cap) {
+		ArrayList<Room> good = new ArrayList<Room>();
+		for(Room r:rooms) {
+			if(r.getCap()>= cap) {
+				good.add(r);
+			}
+		}
+		return good;
+	}
+	
+
+	public void addSchedule(Schedule place) {
+		if(!schedule.check(place)) schedule.add(place);
+	}
+	public void removeSchedule(Schedule delete) {
+		schedule.remove(delete);
+	}
+	public void addSeminar(Seminar sem) {
+		seminar.add(sem);
+	}
+	public void removeSeminar(Seminar sem) {
+		seminar.cancel(sem);
+	}
+	public void updateSeminar() {
+
+	}
+	
+}
