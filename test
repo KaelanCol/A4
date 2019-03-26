@@ -1,0 +1,176 @@
+package ca.viu.csci331.instruction.services.administration;
+import org.junit.*;
+
+import ca.viu.csci331.instruction.model.*;
+public class AdmininstrationTest {
+	
+	
+@Test
+public void addRoomTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Room r = new Room("R1","B1",30);
+	a.addRoom(r);
+	Assert.assertNotNull(a);
+	
+}
+@Test
+public void addSchdeduleTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Schedule s = new Schedule(null, 12, 30, 1, null);
+	a.addSchedule(s);
+	Assert.assertNotNull(a);
+}
+@Test
+public void addSeminarTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Seminar s = new Seminar("4",null,null);
+	a.addSeminar(s);
+	Assert.assertNotNull(a);
+}
+@Test
+public void cancelTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Course c = new Course();
+	a.offer(c);
+	a.cancel(c);
+	Assert.assertTrue(a.empty());
+	
+}
+@Test
+public void hireTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Instructor i = new Instructor();
+	a.hire(i);
+	Assert.assertNotNull(a);
+	
+}
+
+@Test
+public void offerTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Course c = new Course();
+	a.offer(c);
+	Assert.assertNotNull(a);
+	
+}
+@Test
+public void RemoveRoom(){
+	Administration a = new Administration(10,10,10,10,10);
+	Room r = new Room(null, null, 0);
+	a.addRoom(r);
+	a.removeRoom(r);
+	Assert.assertTrue(a.emptyR());
+	
+	
+}
+@Test
+public void RemoveScheduleTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Schedule s = new Schedule(null, 0, 0, 0, null);
+	a.addSchedule(s);
+	a.removeSchedule(s);
+	Assert.assertTrue(a.emptyS());
+}
+@Test
+public void RemoveSeminarTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Seminar s = new Seminar();
+	a.addSeminar(s);
+	a.removeSeminar(s);
+	Assert.assertTrue(a.emptySem());
+	
+}
+@Test
+public void searchCourseNameTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Course c = new Course("math", null, 0, null);
+	a.offer(c);
+	Assert.assertEquals(a.searchCourseName("math"),c);
+}
+@Test
+public void searchCourseNumTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Course c = new Course("math", "111", 0, null);
+	a.offer(c);
+	Assert.assertEquals(a.searchCourseNum("111"),c);
+	
+}
+@Test
+public void searchIdTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Instructor i = new Instructor(null,"112",null); 
+	a.hire(i);
+	Assert.assertEquals(a.searchId("112"),i);
+}
+@Test
+public void searchNameTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Instructor i = new Instructor("jim","112",null); 
+	a.hire(i);
+	Assert.assertEquals(a.searchName("jim"),i);
+}
+@Test
+public void terminateTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Instructor i = new Instructor();
+	a.hire(i);
+	a.terminate(i);
+	Assert.assertTrue(a.emptyI());
+}
+@Test
+public void ListBuildingRoomsTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Room r = new Room(null, "b3", 0);
+	a.addRoom(r);	
+	Room p = new Room(null, "b3", 0);
+	a.addRoom(p);
+	a.ListBuildingRooms("b3");
+	Assert.assertNotNull(a);
+}
+@Test
+public void ListRoomsTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Room r = new Room(null, "b3", 11);
+	a.addRoom(r);	
+	Room p = new Room(null, "b3", 11);
+	a.addRoom(p);
+	
+	Assert.assertNotNull(a.ListRooms(10));
+	
+}
+@Test
+public void updateCourseTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Course c = new Course("math", "111", 0, null);
+	Course b = new Course("math1", "112", 0, null);
+	a.offer(c);
+	Assert.assertSame(a.updateCourse(c,b), b);
+	
+	
+}
+@Test
+public void updateInstructorTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Instructor i = new Instructor("jim","112",null);
+	Instructor ni = new Instructor("jim","122",null); 
+	a.hire(i);
+	Assert.assertSame(a.updateInstructor(i,ni), ni);
+}
+@Test
+public void updateRoomTest(){
+	Administration a = new Administration(10,10,10,10,10);
+	Room c = new Room("math", null, 0);
+	Room b = new Room("math", null, 13);
+	a.addRoom(c);
+	Assert.assertSame(a.updateRoom(c,b), b);
+}
+@Test
+public void updateSeminar(){
+	Administration a = new Administration(10,10,10,10,10);
+	Seminar s = new Seminar("22", null, null);
+	Seminar t = new Seminar("33",null,null);
+	a.addSeminar(s);
+	Assert.assertSame(a.updateSeminar(s,t), t);
+	
+}
+}
