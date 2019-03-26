@@ -8,13 +8,18 @@ public class Administration {
 //	private Instructor phil = new Instructor();
 	private Instructors professors = new Instructors();
 	private Schedules schedule = new Schedules();
+	//private ArrayList<Schedules> val = new ArrayList<Schedules>();
 	private Seminars seminar = new Seminars();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
-	private OfferredCourses courses = new OfferredCourses();
+	private OfferedCourses courses = new OfferedCourses();
 	
 	
-	public Administration(){
-		
+	public Administration(int p, int s, int sem, int r, int c){
+		professors = new Instructors(p);
+		schedule = new Schedules(s);
+		seminar = new Seminars(sem);
+		rooms = new ArrayList<Room>(r);
+		courses = new OfferedCourses(c);
 	}
 	public void hire(Instructor hired){
 		if(!professors.contains(hired)){
@@ -27,7 +32,7 @@ public class Administration {
 		professors.terminate(fired);
 	}
 	public Instructor updateInstructor(Instructor i, Instructor ni){
-		if(professors.contains(i) && !rooms.contains(ni)) {
+		if(professors.contains(i) && !professors.contains(ni)) {
 			i=ni;
 			return ni;
 		}else {
@@ -98,8 +103,6 @@ public class Administration {
 		}
 		return good;
 	}
-	
-
 	public void addSchedule(Schedule place) {
 		if(!schedule.check(place)) schedule.add(place);
 	}
@@ -112,8 +115,32 @@ public class Administration {
 	public void removeSeminar(Seminar sem) {
 		seminar.cancel(sem);
 	}
-	public void updateSeminar() {
-
+	public Seminar updateSeminar(Seminar s, Seminar sem) {
+		if(seminar.contains(s) && !seminar.contains(sem)) {
+			s=sem;
+			return sem;
+		}else {
+		 return null;
+		}
 	}
-	
+	public boolean empty() {
+		if(courses.empty()) return true;
+		else return false;
+	}
+	public boolean emptyI() {
+		if(professors.emptyI()) return true;
+		else return false;
+	}
+	public boolean emptyR() {
+		if(rooms.isEmpty()) return true;
+		else return false;
+	}
+	public boolean emptyS() {
+		if(schedule.emptyS()) return true;
+		else return false;
+	}
+	public boolean emptySem() {
+		if(seminar.emptySem()) return true;
+		else return false;
+	}
 }
